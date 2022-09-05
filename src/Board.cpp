@@ -77,7 +77,7 @@ int Board::getResponse(const std::string &res) {
     return 42;
 }
 
-bool Board::iGotChecked(const Location &king_location) const {
+bool Board::iGotChecked(const Location &king_location){
     for (int i = 0; i < BORDERS.row; i++) {
         for (int j = 0; j < BORDERS.col; j++) {
             if (m_pieces[i][j] && m_pieces[i][j]->getType() != m_turn) {
@@ -90,7 +90,7 @@ bool Board::iGotChecked(const Location &king_location) const {
     return false;
 }
 
-bool Board::iDidCheck(const Location& king_location) const {
+bool Board::iDidCheck(const Location& king_location) {
     for (int i = 0; i < BORDERS.row; i++) {
         for (int j = 0; j < BORDERS.col; j++) {
             if (m_pieces[i][j] && m_pieces[i][j]->getType() == m_turn) {

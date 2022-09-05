@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <memory>
 #include "macros.h"
 /**
  * Piece abstract Class
