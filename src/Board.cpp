@@ -7,8 +7,8 @@ Board::Board(const std::string &board): m_turn(t_1){
 void Board::createInitialPieces(const std::string &board) {
     std::vector<std::unique_ptr<Piece>> temp_pieces;
     int string_index = 0;
-    for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
+    for(int i = 0; i < BORDERS.row; i++){
+        for(int j = 0; j < BORDERS.col; j++){
             if(board[string_index]!='#')
                 temp_pieces.emplace_back(Factory<Piece>::create(board[string_index],Location({i,j})));
             else
@@ -36,9 +36,9 @@ int Board::getResponse(const std::string &res) {
     else if (!m_pieces[src.row][src.col]->validateMovement(dest,m_pieces))
         return 21;
 
-    if (m_pieces[src.row][src.col]->getPiece() == 'K')
+    if (m_pieces[src.row][src.col]->getPiece() == King)
         m_king_1_pos = { dest.row,dest.col };
-    if (m_pieces[src.row][src.col]->getPiece() == 'k')
+    if (m_pieces[src.row][src.col]->getPiece() == king)
         m_king_2_pos = { dest.row,dest.col };
     m_pieces[dest.row][dest.col] = std::move(m_pieces[src.row][src.col]);
     m_pieces[dest.row][dest.col]->setPosition({dest.row,dest.col});
@@ -63,7 +63,7 @@ int Board::getResponse(const std::string &res) {
         if (iGotChecked(m_king_2_pos)) {
             m_pieces[src.row][src.col] = std::move(m_pieces[dest.row][dest.col]);
             m_pieces[src.row][src.col]->setPosition({src.row,src.col});
-            if(m_pieces[src.row][src.col]->getPiece() == 'k')
+            if(m_pieces[src.row][src.col]->getPiece() == king)
                 m_king_2_pos = {src.row,src.col};
             return 31;
         }
@@ -77,7 +77,7 @@ int Board::getResponse(const std::string &res) {
     return 42;
 }
 
-bool Board::iGotChecked(const Location &king_location) {
+bool Board::iGotChecked(const Location &king_location) const {
     for (int i = 0; i < BORDERS.row; i++) {
         for (int j = 0; j < BORDERS.col; j++) {
             if (m_pieces[i][j] && m_pieces[i][j]->getType() != m_turn) {
@@ -90,7 +90,7 @@ bool Board::iGotChecked(const Location &king_location) {
     return false;
 }
 
-bool Board::iDidCheck(const Location& king_location) {
+bool Board::iDidCheck(const Location& king_location) const {
     for (int i = 0; i < BORDERS.row; i++) {
         for (int j = 0; j < BORDERS.col; j++) {
             if (m_pieces[i][j] && m_pieces[i][j]->getType() == m_turn) {
