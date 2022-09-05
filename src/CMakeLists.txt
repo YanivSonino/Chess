@@ -1,1 +1,9 @@
-﻿target_sources (Chess PRIVATE "main.cpp" "Chess.cpp" "Board.cpp" "Piece.cpp" "Pawn.cpp")
+﻿target_sources (Chess PRIVATE "main.cpp"
+"Chess.cpp"
+"Piece.cpp"
+"Rook.cpp"
+"Board.cpp"
+"King.cpp"
+"Bishop.cpp"
+"Queen.cpp"
+"Pawn.cpp")

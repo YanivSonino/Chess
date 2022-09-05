@@ -12,8 +12,8 @@ private:
     Location m_king_1_pos;
     Location m_king_2_pos;
     enum PLAYER m_turn;
-    bool iGotChecked(const Location&) const;
-    bool iDidCheck(const Location&) const;
+    bool iGotChecked(const Location&);
+    bool iDidCheck(const Location&);
     void changeTurn();
     void createInitialPieces(const std::string &);
     std::vector<std::vector<std::unique_ptr<Piece>>> m_pieces;
